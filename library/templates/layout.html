@@ -1,0 +1,44 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <title>图书销售管理系统</title>
+    <meta charset="UTF-8">
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <!--link rel="stylesheet" href="{% static 'plugins/bootstrap-3.4.1/css/bootstrap.min.css' %}"-->
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+</head>
+<body>
+    <nav class="navbar navbar-inverse">
+        <ul class="nav nav-pills">
+            <li role="presentation" ><a href="/books/">图书销售管理</a></li>
+            <li role="presentation"><a href="/admin_judge/">管理员页面</a></li>
+
+            <li role="presentation" class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                查询<span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="/books/search_book/">查询书籍</a></li>
+                    <li><a href="/orders/order_list/">查看订单</a></li>
+                    <li><a href="/bills/">查询账单</a></li>
+                </ul>
+            </li>
+
+            <li role="presentation" ><a href='/orders/new_book_order/'>新书进货</a></li>
+            <li class="active navbar-right"><a href="/logout/"><strong>退出登录</strong></a></li>
+        
+        </ul>
+
+          
+
+    </nav>
+    <div>
+        {%block content%}{% endblock %}
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+{% extends 'layout.html' %}
+
+{%block content%}
+
+
+
+
+<div class='container'>
+
+    <h1>用户列表</h1>
+    <div class='container'>
+        <button class='btn btn-primary' onclick="location.href='/super_admin/user_add'">添加用户</button>
+    </div>
+    
+<table class='table'>
+    
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>姓名</th>
+            <th>密码</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        {%for user in user_list%}
+        <tr>
+            <td>{{user.id}}</td>
+            <td>{{user.username}}</td>
+            <td>{{user.password}}</td>
+            <td>
+                <button class='btn btn-success' onclick="location.href='/super_admin/user_info/?nid={{user.id}}'">查看</button>
+                <button class='btn btn-danger' onclick="location.href='/super_admin/user_delete/?nid={{user.id}}'">删除</button>
+            </td>
+        </tr>
+        {%endfor%}
+    </tbody>
+   
+
+</table>
+</div>
+
+{%endblock%}

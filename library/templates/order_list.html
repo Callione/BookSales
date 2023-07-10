@@ -1,0 +1,63 @@
+{% extends 'layout.html' %}
+
+{%block content%}
+<div class='container'>
+    <h1>订单管理</h1>
+    <!-- Split button -->
+    <div class="btn-group">
+        <button type="button" class="btn btn-primary"onclick="location.href='/orders/order_list/'">全部</button>
+        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span class="caret"></span>
+        <span class="sr-only">Toggle Dropdown</span>
+        </button>
+        <ul class="dropdown-menu">
+            <li><a href="{% url 'order_list_by_state' state='未付款' %}">未付款</a></li>
+            <li><a href="{% url 'order_list_by_state' state='已付款' %}">已付款</a></li>
+            <li><a href="{% url 'order_list_by_state' state='已退货' %}">已退货</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="{% url 'order_list_by_state' state='已添加' %}">已添加</a></li>
+        </ul>
+    </div> 
+
+    
+    <table class='table'>
+    
+        <thead>
+            <tr>
+                <th>书籍</th>
+                <th>进货价格</th>
+                <th>数量</th>
+                <th>状态</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {%for order in order_list%}
+            <tr>
+                <td>{{order.book}}</td>
+                <td>{{order.purchase_price}}</td>
+                <td>{{order.amount}}</td>
+                <td>{{order.state}}</td>
+                <td>
+                    {% if order.state == '未付款'%}
+                    <!--只有未付款的订单才有相应的操作按钮--> 
+                    <button class='btn btn-success' onclick="location.href='/orders/{{order.id}}/pay_order/'">付款</button>
+                    <button class='btn btn-danger' onclick="location.href='/orders/{{order.id}}/cancel_order/'">退货</button>
+                    {% endif %}
+                    {% if order.state == '已付款'%}
+                    <!--只有已付款的订单才有添加新书按钮--> 
+                    <button class='btn btn-danger' onclick="location.href='/orders/{{order.id}}/add_book/'">添加新书</button>
+                    {% endif %}
+                </td>
+            </tr>
+            {%endfor%}
+        </tbody>
+       
+    
+    </table>
+
+
+</div>
+
+
+{%endblock%}

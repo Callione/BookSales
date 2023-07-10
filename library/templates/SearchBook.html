@@ -1,0 +1,90 @@
+{% extends 'layout.html' %}
+
+{%block content%}
+
+
+
+
+<div class='container'>
+
+    <h1>库存书目</h1>
+
+    <div class='container'>
+        <form method ='post'>
+            {%csrf_token%}
+            <div class='row'>
+                
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label >查询内容</label>
+                        <input type="text" name='value' placeholder="请输入查询关键词">
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                    <label>查询类型</label>
+                    <select  name='key'>
+                        <option>书籍编号</option>
+                        <option>ISBN</option>
+                        <option>书籍名称</option>
+                        <option>作者</option>
+                        <option>出版社</option>
+                    </select>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <button type="submit" class="btn btn-primary">搜索</button>
+                </div>
+            </div>  
+        </form>
+
+
+    </div>
+
+
+
+
+  <table class='table'>
+    
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>ISBN</th>
+            <th>书名</th>
+            <th>出版社</th>
+            <th>作者</th>
+            <th>零售价</th>
+            <th>库存数量</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        {%for book in book_list%}
+        <tr>
+            <td>{{book.id}}</td>
+            <td>{{book.isbn}}</td>
+            <td>{{book.title}}</td>
+            <td>{{book.publisher}}</td>
+            <td>{{book.author}}</td>
+            <td>{{book.retail_price}}</td>
+            <td>{{book.amount}}</td>
+            <td>
+                <button class='btn btn-success' onclick="location.href='/orders/{{book.id}}/make_order/'">进货</button>
+                <button class='btn btn-primary' onclick="location.href='/books/{{book.id}}/book_edit/'">编辑</button>
+                <button class='btn btn-success' onclick="location.href='/books/{{book.id}}/book_retail/'">零售</button>
+            </td>
+        </tr>
+        {%endfor%}
+    </tbody>
+   
+
+</table>
+</div>
+
+
+
+
+
+{%endblock%}

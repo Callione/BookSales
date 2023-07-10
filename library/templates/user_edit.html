@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+
+{%block content%}
+    
+<a href="/norm_admin/" class="btn btn-default btn-lg">
+    <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> 返回
+</a>
+    <div class='container'>
+        <h1>信息管理</h1>
+        <div class='panel panel-default'>
+            <div class='panel-heading'>
+                <h1 class='panel-title'> 编辑信息 </h1>
+            </div>
+            <div class='panel-body'>
+                <form method='post' novalidate>
+                        {% csrf_token %}
+
+                        {% for field in form %}
+                        <div class='form-group'>
+                            <label>{{field.label}}</label>
+                            {{field}}
+                            <span style="color:red;">{{field.errors.0}}</span>
+                        </div> 
+                        {%  endfor %}
+
+                        <button type="submit" class='btn btn-primary'>提交</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+{%endblock%}

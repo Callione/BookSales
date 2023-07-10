@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+
+{%block content%}
+
+    <a href="/books/search_book/" class="btn btn-default btn-lg">
+        <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> 返回
+    </a>
+
+    <div class='container'>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+        <h1>图书零售</h1>
+        <div class='panel-body'>
+            <p>当前库存数量:{{book.amount}}</p>
+
+            {%if error%}
+            <div class="alert alert-danger">{{ error }}</div>
+            {%endif%}
+
+            <form method='post'>
+                    {% csrf_token %}
+                    <label for="quantity">零售数量</label>
+                    <input type="number" step='1' class="form-control" name="quantity" placeholder="输入零售数量" required>
+
+                    <button type="submit" class='btn btn-primary'>确认零售</button>
+            </form>
+        </div>
+
+    </div>
+{%endblock%}

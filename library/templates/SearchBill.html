@@ -1,0 +1,91 @@
+{% extends 'layout.html' %}
+
+{%block content%}
+
+
+<div class='container'>
+    <h1>账单查询</h1>
+
+    <div class="container">
+        <form method='post'>
+            {%csrf_token%}
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="start_date">起始时间</label>
+                    <input type="date" id="start_date" name="start_date" class="form-control" required>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="end_date">终止时间</label>
+                    <input type="date" id="end_date" name="end_date" class="form-control" required>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <button type="submit" class="btn btn-success">查询</button>
+            </div>
+        </div>
+        </form>
+    </div>
+    
+
+    <div class="row">
+
+        {% if total_income%}
+        <div class="col-md-3">
+            <h3 class="text-success">总收入: {{ total_income }}</h3>
+        </div>
+        {% endif%}
+
+        {% if total_expense%}
+        <div class="col-md-3">
+            <h3 class="text-danger">总支出: {{ total_expense }}</h3>
+        </div>
+        {% endif%}
+
+        {% if net_profit%}
+        <div class="col-md-3">
+            <h3 class="text-success">净收入: {{ net_profit }}</h3>
+        </div>
+        {% endif%}
+
+    </div>
+
+
+
+    <table class='table'>
+    
+        <thead>
+            <tr>
+                <th>收入/支出</th>
+                <th>金额</th>
+                <th>日期</th>
+            </tr>
+        </thead>
+        <tbody>
+            {%for bill in bill_list%}
+            <tr class="{% if bill.type == 'I' %}success{% elif bill.type == 'O' %}danger{% endif %}">
+                <td>
+                {% if bill.type == 'I' %}
+                        收入
+                    {% elif bill.type == 'O' %}
+                        支出
+                    {% else %}
+                        未知
+                    {% endif %}
+                </td>
+                <td>{{bill.amount}}</td>
+                <td>{{bill.date}}</td>
+            </tr>
+            {%endfor%}
+        </tbody>
+       
+    
+    </table>
+
+
+</div>
+
+
+{%endblock%}

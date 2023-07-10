@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="container">
+  <h1>添加新书</h1>
+  <form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="amount">书籍名称:</label>
+      <input type="text" class="form-control" id="amount" name="amount" value="{{ order.book.title }}" readonly>
+    </div>
+    <div class="form-group">
+        <label for="retail_price">之前的零售价:</label>
+        <input type="text" class="form-control" id="retail_price" name="retail_price" value="{{ order.book.retail_price }}" readonly>
+      </div>
+      <div class="form-group">
+        <label for="purchase_price">进货价格:</label>
+        <input type="text" class="form-control" id="purchase_price" name="purchase_price" value="{{ order.purchase_price }}" readonly>
+      </div>
+    <div class="form-group">
+      <label for="retail_price">零售价:</label>
+      <input type="number" step="0.01" value="{{order.book.retail_price}}" class="form-control" name="retail_price" placeholder="请输入零售价" required>
+      <span style="color:red;">{{error}}</span>
+    </div>
+    <button type="submit" class="btn btn-primary">添加到库存</button>
+  </form>
+</div>
+{% endblock %}

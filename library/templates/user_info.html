@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+
+{%block content%}
+
+<a href="/super_admin/user_list/" class="btn btn-default btn-lg">
+    <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> 返回
+</a>
+
+<div class='container'>
+    <h1>详细信息</h1>
+    <div class='panel panel-default'>
+        <div class='panel-heading'>
+            <h1 class='panel-title'> 编辑信息 </h1>
+        </div>
+        <div class='panel-body'>
+            <form>
+                    {% csrf_token %}
+
+                    {% for field in form %}
+                    <div class='form-group'>
+                        <label>{{field.label}}</label>
+                        {{field}}
+                        <span style="color:red;">{{field.errors.0}}</span>
+                    </div> 
+                    {%  endfor %}
+            </form>
+        </div>
+
+    </div>
+</div>
+
+{%endblock%}

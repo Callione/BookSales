@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+
+<a href="/books/search_book/" class="btn btn-default btn-lg">
+  <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> 返回
+</a>
+
+<div class="container">
+  <h1>创建进货订单</h1>
+  <form method="post">
+    {% csrf_token %}
+
+    {% if error %}
+    <div class="alert alert-danger">
+      {{ error }}
+    </div>
+    {% endif %}
+
+    <div class="form-group">
+      <label for="purchase_price">进货价格:</label>
+      <input type="number" step="0.01" class="form-control" name="purchase_price" placeholder="请输入进货价格">
+    </div>
+    <div class="form-group">
+      <label for="amount">数量:</label>
+      <input type="number" step='1' class="form-control" name="amount" placeholder="请输入数量">
+    </div>
+    <button type="submit" class="btn btn-primary">创建订单</button>
+  </form>
+</div>
+{% endblock %}
